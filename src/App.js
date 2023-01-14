@@ -2,6 +2,7 @@ import "./App.css";
 import Deso from "deso-protocol";
 import { useState } from "react";
 const deso = new Deso();
+// console.log(deso)
 function App() {
   const [sampleResponse, setSampleResponse] = useState();
   const [loginResponse, setLoginResponse] = useState();
@@ -35,7 +36,7 @@ function App() {
       >
         get user
       </button>
-      <button
+      {/* <button
         onClick={async () => {
           const postResponse = await deso.posts.submitPost({
             UpdaterPublicKeyBase58Check: deso.identity.getUserKey(),
@@ -49,7 +50,21 @@ function App() {
         }}
       >
         submit post
-      </button>
+      </button> */}
+      <button onClick={async() => {
+           const request = {
+             "UpdaterPublicKeyBase58Check": deso.identity.getUserKey(),
+             "BodyObj": {
+               "Body": "Checking out the developer hub",
+               "VideoURLs": [],
+               "ImageURLs": []
+             }
+           };
+           const response = await deso.posts.submitPost(request);
+         }  
+       }> submit post
+       </button>
+
       <div>
         Login info
         <pre>{loginResponse}</pre>
